@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.kehao.feishu.robot.config.FeiShuRobotConfiguration
