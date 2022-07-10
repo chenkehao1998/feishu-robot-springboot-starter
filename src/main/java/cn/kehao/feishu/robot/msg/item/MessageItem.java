@@ -1,4 +1,7 @@
 package cn.kehao.feishu.robot.msg.item;
 
-public class MessageItem {
+import com.alibaba.fastjson.JSONObject;
+
+public interface MessageItem {
+    JSONObject buildJsonObject();
 }
