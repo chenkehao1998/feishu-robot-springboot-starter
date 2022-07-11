@@ -1,7 +1,9 @@
 package cn.kehao.feishu.robot.req;
 
 import cn.kehao.feishu.robot.enums.MessageTypeEnum;
+import cn.kehao.feishu.robot.msg.ImageMessage;
 import cn.kehao.feishu.robot.msg.PostMessage;
+import cn.kehao.feishu.robot.msg.ShareChatMessage;
 import cn.kehao.feishu.robot.msg.TextMessage;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Component;
@@ -25,6 +27,23 @@ public class RequestBuilder {
         JSONObject post = new JSONObject();
         content.put("post",post);
         post.put("zh_cn",msg.buildJsonObject());
+        return jsonObject.toJSONString();
+    }
+
+    public String buildImageMessageReq(ImageMessage msg){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("msg_type", MessageTypeEnum.IMAGE.getCode());
+        JSONObject content = new JSONObject();
+        jsonObject.put("content",msg.buildJsonObject());
+        return jsonObject.toJSONString();
+    }
+
+
+    public String buildShareChatMessageReq(ShareChatMessage msg){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("msg_type", MessageTypeEnum.SHARE_CHAT.getCode());
+        JSONObject content = new JSONObject();
+        jsonObject.put("content",msg.buildJsonObject());
         return jsonObject.toJSONString();
     }
 }

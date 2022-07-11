@@ -1,10 +1,14 @@
-# 简介
-自用的飞书机器人spring-starter
+## 简介
+自用的飞书机器人spring-starter，目前只支持群机器人，因为我用飞书个人版
 
-# 进度
-刚刚开始写，只实现了基本文本和富文本的消息发送
+## 进度
+只实现了基本文本、富文本、图片、群名片的消息发送
 
-# 使用方法
+消息卡片有空再实现
+
+最新进度在dev分支
+
+## 使用方法
 配置webhookUrl地址
 ```yaml
 kehao:
@@ -24,7 +28,8 @@ void textMessageTest() {
     TextMessage textMessage = new TextMessage("123");
     log.info("{}",textMessageSender.send(textMessage));
 }
-
+```
+```java
 /**
  * 富文本消息的推送
  */
@@ -42,6 +47,33 @@ void postMessageTest() {
     log.info("{}",result);
 }
 ```
+```java
+/**
+ * 图片消息的发送（这个需要申请应用机器人，否则没法上传图片，传入的是图片key）
+ */
+@Autowired
+private ImageMessageSender imageMessageSender;
 
-# 飞书开发者文档
+void imgMessgaeTest(){
+    ImageMessage imageMessage = new ImageMessage("img_ecffc3b9-8f14-400f-a014-05eca1a4310g");
+    String result = imageMessageSender.send(imageMessage);
+    log.info("{}",result);
+}
+```
+```java
+/**
+ * 群名片的发送
+ */
+@Autowired
+private ShareChatMessageSender shareChatMessageSender;
+
+void shareChatMessageTest(){
+    ShareChatMessage shareChatMessage = new ShareChatMessage("oc_f5b1a7eb27ae2c7b6adc2a74faf339ff");
+    String result = shareChatMessageSender.send(shareChatMessage);
+    log.info("{}",result);
+}
+```
+
+
+## 飞书开发者文档
 [消息体格式](https://open.feishu.cn/document/uAjLw4CM/ukTMukTMukTM/im-v1/message/create_json#392c2afd)
