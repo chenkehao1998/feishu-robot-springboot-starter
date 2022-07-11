@@ -2,7 +2,7 @@ package cn.kehao.feishu.robot;
 
 import cn.kehao.feishu.robot.config.FeiShuRobotConfiguration;
 import cn.kehao.feishu.robot.msg.ImageMessage;
-import cn.kehao.feishu.robot.msg.PostMessageBuilder;
+import cn.kehao.feishu.robot.msg.PostMessage;
 import cn.kehao.feishu.robot.msg.ShareChatMessage;
 import cn.kehao.feishu.robot.msg.TextMessage;
 
@@ -39,12 +39,12 @@ class FeishuRobotSpringbootStarterApplicationTests {
 
     @Test
     void postMessageTest() {
-        String result = postMessageSender.send(PostMessageBuilder.getBuilder()
-                .title("标题")
+        String result = postMessageSender.send(
+                PostMessage.newInstance("标题")
                 .line("第一行")
                 .line("第2行")
                 .line("xxxxxxxxxx").appendMessage("111")
-                .build());
+        );
         log.info("{}",result);
     }
 
