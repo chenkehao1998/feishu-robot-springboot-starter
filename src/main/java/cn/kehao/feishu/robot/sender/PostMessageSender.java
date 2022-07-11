@@ -16,14 +16,16 @@ public class PostMessageSender {
     @Autowired
     private FeiShuRobotProperties feiShuRobotProperties;
 
-    @Autowired
-    private RequestBuilder requestBuilder;
-
-    public String send(PostMessage msg) {
-        String result = HttpRequest.post(feiShuRobotProperties.getWebhookUrl())
-                .body(requestBuilder.buildPostMessageReq(msg))
+    public static String send(String url, PostMessage msg) {
+        String result = HttpRequest.post(url)
+                .body(RequestBuilder.buildPostMessageReq(msg))
                 .execute().body();
         return result;
+    }
+
+
+    public String send(PostMessage msg) {
+        return PostMessageSender.send(feiShuRobotProperties.getWebhookUrl(),msg);
     }
 
 }

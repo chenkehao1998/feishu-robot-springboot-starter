@@ -6,11 +6,10 @@ import cn.kehao.feishu.robot.msg.PostMessage;
 import cn.kehao.feishu.robot.msg.ShareChatMessage;
 import cn.kehao.feishu.robot.msg.TextMessage;
 import com.alibaba.fastjson.JSONObject;
-import org.springframework.stereotype.Component;
 
-@Component
+
 public class RequestBuilder {
-    public String buildTextMessageReq(TextMessage msg){
+    public static String buildTextMessageReq(TextMessage msg){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("msg_type", MessageTypeEnum.TEXT.getCode());
         JSONObject content = new JSONObject();
@@ -19,7 +18,7 @@ public class RequestBuilder {
         return jsonObject.toJSONString();
     }
 
-    public String buildPostMessageReq(PostMessage msg){
+    public static String buildPostMessageReq(PostMessage msg){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("msg_type", MessageTypeEnum.POST.getCode());
         JSONObject content = new JSONObject();
@@ -30,7 +29,7 @@ public class RequestBuilder {
         return jsonObject.toJSONString();
     }
 
-    public String buildImageMessageReq(ImageMessage msg){
+    public static String buildImageMessageReq(ImageMessage msg){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("msg_type", MessageTypeEnum.IMAGE.getCode());
         JSONObject content = new JSONObject();
@@ -39,7 +38,7 @@ public class RequestBuilder {
     }
 
 
-    public String buildShareChatMessageReq(ShareChatMessage msg){
+    public static String buildShareChatMessageReq(ShareChatMessage msg){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("msg_type", MessageTypeEnum.SHARE_CHAT.getCode());
         JSONObject content = new JSONObject();

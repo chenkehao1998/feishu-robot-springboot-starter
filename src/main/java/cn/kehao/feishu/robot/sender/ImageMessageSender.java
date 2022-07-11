@@ -16,13 +16,14 @@ public class ImageMessageSender {
     @Autowired
     private FeiShuRobotProperties feiShuRobotProperties;
 
-    @Autowired
-    private RequestBuilder requestBuilder;
-
-    public String send(ImageMessage msg) {
-        String result = HttpRequest.post(feiShuRobotProperties.getWebhookUrl())
-                .body(requestBuilder.buildImageMessageReq(msg))
+    public static String send(String url, ImageMessage msg) {
+        String result = HttpRequest.post(url)
+                .body(RequestBuilder.buildImageMessageReq(msg))
                 .execute().body();
         return result;
+    }
+
+    public String send(ImageMessage msg) {
+       return ImageMessageSender.send(feiShuRobotProperties.getWebhookUrl(),msg);
     }
 }

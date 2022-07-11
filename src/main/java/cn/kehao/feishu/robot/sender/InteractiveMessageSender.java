@@ -13,13 +13,16 @@ public class InteractiveMessageSender {
     @Autowired
     private FeiShuRobotProperties feiShuRobotProperties;
 
-    @Autowired
-    private RequestBuilder requestBuilder;
 
     public String send(TextMessage msg) {
-        String result = HttpRequest.post(feiShuRobotProperties.getWebhookUrl())
-                .body(requestBuilder.buildTextMessageReq(msg))
+        return InteractiveMessageSender.send(feiShuRobotProperties.getWebhookUrl(), msg);
+    }
+
+    public static String send(String url,TextMessage msg) {
+        String result = HttpRequest.post(url)
+                .body(RequestBuilder.buildTextMessageReq(msg))
                 .execute().body();
         return result;
     }
+
 }

@@ -17,13 +17,15 @@ public class ShareChatMessageSender {
     @Autowired
     private FeiShuRobotProperties feiShuRobotProperties;
 
-    @Autowired
-    private RequestBuilder requestBuilder;
-
-    public String send(ShareChatMessage msg) {
-        String result = HttpRequest.post(feiShuRobotProperties.getWebhookUrl())
-                .body(requestBuilder.buildShareChatMessageReq(msg))
+    public static String send(String url, ShareChatMessage msg) {
+        String result = HttpRequest.post(url)
+                .body(RequestBuilder.buildShareChatMessageReq(msg))
                 .execute().body();
         return result;
+    }
+
+
+    public String send(ShareChatMessage msg) {
+        return ShareChatMessageSender.send(feiShuRobotProperties.getWebhookUrl(),msg);
     }
 }
