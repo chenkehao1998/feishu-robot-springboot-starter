@@ -14,7 +14,7 @@
 kehao:
   feishu:
     robot:
-      webhookUrl: https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxxxxxxxx
+      webhook-url: https://open.feishu.cn/open-apis/bot/v2/hook/xxxxxxxxxxxx
 ```
 然后使用
 ```java
